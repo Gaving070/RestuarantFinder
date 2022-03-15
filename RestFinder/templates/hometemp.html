@@ -2,13 +2,34 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Hello, Flask</title>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}" />
     </head>
+
     <body>
-        {%if name %}
-            <strong>Hello there, {{ name }}!</strong> It's {{ date.strftime("%A, %d %B, %Y at %X") }}.
-        {% else %}
-            What's your name? Provide it after /home/ in the URL.
-        {% endif %}
+        <div class="navbar">
+            <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
+            <a href="{{ url_for('rlist') }}" class="navbar-item">List</a>
+            <a href="{{ url_for('rpage') }}" class="navbar-item">Restaurant Page</a>
+        </div>
+
+        <div class="body-content">
+            {% block content %}
+            {% endblock %}
+            <hr/>
+        </div>
+        <h1>Home</h1>
+        <label for="zcode">Zip Code:</label>
+        <input type="text" id="zcode" name="zcode"><br><br>
+        <label for="distance">Distance:</label>
+        <input type="text" id="distance" name="distance"><br><br>
+        <div class="dropdown">
+            <button class="dropbtn">Food Type</button>
+            <div class="dropdown-content">
+                <a href="#">Italian</a>
+                <a href="#">Fast Food</a>
+            </div>
+        </div>
+        <button onclick="zipsearch()" type="button">Search</button>
     </body>
 </html>
