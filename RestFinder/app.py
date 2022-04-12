@@ -2,24 +2,24 @@ from flask import Flask
 from datetime import datetime
 from flask import render_template
 import re
-#import requests
+import requests
 
-url = "https://apidocumenu.com/v2/restaurant/4072702673999819"
-payload = {}
+url = "https://restaurants-near-me-usa.p.rapidapi.com/restaurants/location/state/NJ/city/Belmar/0"
+
 headers = {
-    'x-api-key':'4d2007058588d43e290a8dc552d7b52b'
+	"X-RapidAPI-Host": "restaurants-near-me-usa.p.rapidapi.com",
+	"X-RapidAPI-Key": "02318f0351msh71338a97178fe3ap140e08jsnd33a129faa19"
 }
-#response = requests.request("GET",url,headers=headers,data=payload)
+
+response = requests.request("GET", url, headers=headers)
 
 app = Flask(__name__)
-#zcode = zcode
 @app.route("/")
 def home():
     return render_template("hometemp.html")
     return "Hello, Welcome to the Jersey Shore Restaurant Finder!"
-#   def zipsearch():
-#       while zcode={}:
-#           return https://api.documenu.com/v2/restaurants/zip_code/{zip_code}fullmenu=false
+def search():
+    print(response.text)
 
 @app.route("/rlist/")
 def rlist():

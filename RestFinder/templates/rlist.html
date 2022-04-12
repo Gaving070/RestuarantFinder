@@ -7,6 +7,31 @@
     </head>
 
     <body>
+        <body style="background-color:antiquewhite">
+        <div class="header" style="background-color:antiquewhite">
+            Restaurant Finder
+        </div>
+        <div class="navbar">
+            <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
+            <a href="{{ url_for('rlist') }}" class="navbar-item">List</a>
+            <a href="{{ url_for('rpage') }}" class="navbar-item">Restaurant Page</a>
+        </div>
+
+        <div class="body-content">
+            {% block content %}
+            {% endblock %}
+            <hr/>
+        </div>
         <h1>rlist</h1>
+        <div class="pagination">
+            <a href="#">&laquo;</a>
+            <a href="#">1</a>
+            <a href="#" class="active">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">&raquo;</a>
+        </div>
     </body>
 </html> 

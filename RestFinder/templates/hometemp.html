@@ -4,9 +4,13 @@
         <meta charset="utf-8" />
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}" />
+        <link rel="stylesheet" href="https://orioniconlibrary.com/icon-pack/food?style=color"
     </head>
 
-    <body>
+    <body style="background-color:antiquewhite">
+        <div class="header" style="background-color:antiquewhite">
+            Restaurant Finder
+        </div>
         <div class="navbar">
             <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
             <a href="{{ url_for('rlist') }}" class="navbar-item">List</a>
@@ -19,17 +23,27 @@
             <hr/>
         </div>
         <h1>Home</h1>
-        <label for="zcode">Zip Code:</label>
-        <input type="text" id="zcode" name="zcode"><br><br>
-        <label for="distance">Distance:</label>
-        <input type="text" id="distance" name="distance"><br><br>
-        <div class="dropdown">
-            <button class="dropbtn">Food Type</button>
-            <div class="dropdown-content">
-                <a href="#">Italian</a>
-                <a href="#">Fast Food</a>
-            </div>
+        <div class = "form">
+            <label for="state">State:</label>
+            <input type="text" id="zcode" name="zcode"><br><br>
+            <label for="city">City:</label>
+            <input type="text" id="distance" name="distance"><br><br>
+            <form href="{{url_for('rlist') }}">
+                <label for="food">Choose a type of Food:</label>
+                <select name="food" id="food">
+                    <option value="chinese">Chinese</option>
+                    <option value="mexican">Mexican</option>
+                    <option value="italian">Italian</option>
+                    <option value="fast food">Fast Food</option>
+                    <option value="thai">Thai</option>
+                    <option value="pizza">Pizza</option>
+                    <option value="bar food">Bar Food</option>
+                    <option value="japanese">Japanese</option>
+                    <option value="burgers">Burgers</option>
+                </select>
+            <br><br>
+            </form>          
+            <button onclick="zipsearch()" type="button">Search</button>
         </div>
-        <button onclick="zipsearch()" type="button">Search</button>
     </body>
 </html>
