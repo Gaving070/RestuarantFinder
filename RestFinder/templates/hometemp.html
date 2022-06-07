@@ -3,9 +3,40 @@
     <head>
         <meta charset="utf-8" />
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}" />
-        <link rel="stylesheet" href="https://orioniconlibrary.com/icon-pack/food?style=color"
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}">
+        <link rel="stylesheet" href="https://orioniconlibrary.com/icon-pack/food?style=color">
     </head>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+    <script>
+        $("#search").click(function() {
+        searchMethod = 0;
+        url = 'https://restaurants-near-me-usa.p.rapidapi.com/restaurants/location/state/NJ/city/Belmar/0';
+        url += "q=" + $('#cityName').val();
+        url += "q=" + $('#stateName').val();
+        fetch(url, {
+            headers:{
+                'X-RapidAPI-Key': '02318f0351msh71338a97178fe3ap140e08jsnd33a129faa19'
+            }
+        }).then(function(response){
+            return response.json();
+        }).then(function(val){
+        //    console.log(JSON.stringify(val));
+            var city = JSON.stringify(val);
+            cityID = JSON.parse(city).location_suggestions[0].id;
+        //    console.log(cityID);
+            findCuisine();
+        })
+        $("#prevBtn").show();
+        $("#nextBtn").show();
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
+        }
+    </script>
 
     <body style="background-color:antiquewhite">
         <div class="header" style="background-color:antiquewhite">
@@ -14,7 +45,6 @@
         <div class="navbar">
             <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
             <a href="{{ url_for('rlist') }}" class="navbar-item">List</a>
-            <a href="{{ url_for('rpage') }}" class="navbar-item">Restaurant Page</a>
         </div>
 
         <div class="body-content">
@@ -22,12 +52,13 @@
             {% endblock %}
             <hr/>
         </div>
-        <h1>Home</h1>
-        <div class = "form">
+        <h1>Welcome to the Restaurant Finder</h1>
+        <h2>To get your results after you hit search, go to the Restaurant list tab</h2>
+        <div class = "locationform">
             <label for="state">State:</label>
-            <input type="text" id="zcode" name="zcode"><br><br>
+            <input type="text" class="locationform" id="state" placeholder="E.x. NY"><br><br>
             <label for="city">City:</label>
-            <input type="text" id="distance" name="distance"><br><br>
+            <input type="text" class="locationform" id="city" placeholder="E.x. New York City"><br><br>
             <form href="{{url_for('rlist') }}">
                 <label for="food">Choose a type of Food:</label>
                 <select name="food" id="food">
@@ -35,15 +66,16 @@
                     <option value="mexican">Mexican</option>
                     <option value="italian">Italian</option>
                     <option value="fast food">Fast Food</option>
-                    <option value="thai">Thai</option>
+                    <option value="bbq">BBQ</option>
                     <option value="pizza">Pizza</option>
                     <option value="bar food">Bar Food</option>
                     <option value="japanese">Japanese</option>
                     <option value="burgers">Burgers</option>
+                    <option value="breakfast">Breakfast</option>
                 </select>
-            <br><br>
+            <br></br>
             </form>          
-            <button onclick="zipsearch()" type="button">Search</button>
+            <button type="button">Search</button>
         </div>
     </body>
 </html>

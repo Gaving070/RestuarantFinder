@@ -14,7 +14,6 @@
         <div class="navbar">
             <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
             <a href="{{ url_for('rlist') }}" class="navbar-item">List</a>
-            <a href="{{ url_for('rpage') }}" class="navbar-item">Restaurant Page</a>
         </div>
 
         <div class="body-content">
@@ -22,11 +21,37 @@
             {% endblock %}
             <hr/>
         </div>
-        <h1>rlist</h1>
+        <h1>List Of Restaurants</h1>
+            <script>
+            document.getElementById("restaurants").innerHTML = JSON.stringify(arr,null,9)
+            x
+            const api_url = 'https://restaurants-near-me-usa.p.rapidapi.com/restaurants/location/state/NJ/city/Belmar/0';
+            $(document).ready(function() {
+                $.get(api_url, function(data, status) {
+                    var restaurants = (data.restaurants);
+                    $.each(restaurants), function(index, restaurants) {
+                        $("#data").append('<tr><td>' + restaurantName[0] + '</td><td>' + restaurantName[2] + '</td><td>' + restaurantName[5] + '</td><td>' + state[6] + '</td><td>' + state[7] + '</td><td>' + state[9] + '</td></tr>')
+                    })
+                  })
+                })
+            </script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <table class="table" id="data">
+              <tr>
+                <th>Restaurant</th>
+                <th>Address</th>
+                <th>Cuisine Type</th>
+                <th>Hours Open</th>
+              </tr>
+            
+            </table>
+        </body>
+
+        
         <div class="pagination">
             <a href="#">&laquo;</a>
             <a href="#">1</a>
-            <a href="#" class="active">2</a>
+            <a href="#">2</a>
             <a href="#">3</a>
             <a href="#">4</a>
             <a href="#">5</a>

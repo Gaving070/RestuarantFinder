@@ -1,7 +1,6 @@
 from flask import Flask
 from datetime import datetime
 from flask import render_template
-import re
 import requests
 
 url = "https://restaurants-near-me-usa.p.rapidapi.com/restaurants/location/state/NJ/city/Belmar/0"
@@ -13,19 +12,19 @@ headers = {
 
 response = requests.request("GET", url, headers=headers)
 
+print(response.text)
+
 app = Flask(__name__)
+
 @app.route("/")
 def home():
     return render_template("hometemp.html")
-    return "Hello, Welcome to the Jersey Shore Restaurant Finder!"
-def search():
-    print(response.text)
-
+    
+        
 @app.route("/rlist/")
 def rlist():
     return render_template("rlist.html")
-
-@app.route("/rpage/")
-def rpage():
-    return render_template("rpage.html")
     
+
+def search():
+    print("hello")
